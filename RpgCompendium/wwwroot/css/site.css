@@ -20,14 +20,14 @@ html {
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid  rgb(218, 216, 201);
 }
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid  rgb(218, 216, 201);
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgb(255, 0, 0);
+  box-shadow: 0 .25rem .75rem  rgb(218, 216, 201);
 }
 
 button.accept-policy {
@@ -46,7 +46,7 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
   background-color: black;
-  color: white;
+  color:  rgb(218, 216, 201);
 }
 .footer {
   position: absolute;
@@ -59,27 +59,30 @@ body {
 }
 
 .mainBox {
-  border: solid white;
+  background-color: rgb(46, 46, 46);
+  border: solid rgb(218, 216, 201);
   border-width: 1px;
 }
 
 .navBar {
   background-color: rgba(255, 0, 0, 0.324);
-  color: rgb(255, 255, 255);
+  color: rgb(218, 216, 201);
 }
 
 .nav-item {
-  color: white;
+  color: rgb(218, 216, 201);
 }
 
 .nav-item:hover {
-  color: white;
+  color:  rgb(218, 216, 201);
 }
 
 a {
-  color: white;
+  color:  rgb(218, 216, 201);
 }
 
 hr {
-  color: white;
+  color:  rgb(218, 216, 201);
+  border-width: 1px;
+  border-color:  rgb(218, 216, 201);
 }
