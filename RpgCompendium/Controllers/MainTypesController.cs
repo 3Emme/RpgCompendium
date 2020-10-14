@@ -38,8 +38,8 @@ namespace RpgCompendium.Controllers
     public ActionResult Details(int id)
     {
       var thisMainType = _db.MainTypes
-          // .Include(monster => monster.MonsterBehaviors)
-          // .ThenInclude(join => join.MonsterBehaviors)
+          .Include(mainType => mainType.Monsters)
+          .ThenInclude(join => join.Monster)
           .FirstOrDefault(mainType => mainType.MainTypeId == id);
       return View(thisMainType);
     }
@@ -55,7 +55,7 @@ namespace RpgCompendium.Controllers
     {
       _db.Entry(mainType).State = EntityState.Modified;
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new { id = mainType.MainTypeId });
     }
 
     public ActionResult Delete(int id)
@@ -71,6 +71,31 @@ namespace RpgCompendium.Controllers
       _db.MainTypes.Remove(thisMainType);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult AddMonster(int id)
+    {
+      var thisMainType = _db.MainTypes.FirstOrDefault(mainTypes => mainTypes.MainTypeId == id);
+      ViewBag.MonsterId = new SelectList(_db.Monsters, "MonsterId", "MonsterName");
+      return View(thisMainType);
+    }
+    [HttpPost]
+    public ActionResult AddMonster(MainType mainType, int MonsterId)
+    {
+      if (MonsterId != 0)
+      {
+        _db.MonsterMainTypes.Add(new MonsterMainType() { MonsterId = MonsterId, MainTypeId = mainType.MainTypeId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = mainType.MainTypeId });
+    }
+    [HttpPost]
+    public ActionResult DeleteMonster(int mainTypeId, int joinId)
+    {
+      var joinEntry = _db.MonsterMainTypes.FirstOrDefault(entry => entry.MonsterMainTypeId == joinId);
+      _db.MonsterMainTypes.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = mainTypeId });
     }
   }
 }

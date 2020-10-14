@@ -60,7 +60,7 @@ namespace RpgCompendium.Controllers
     {
       _db.Entry(monster).State = EntityState.Modified;
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new { id = monster.MonsterId });
     }
 
     public ActionResult Delete(int id)

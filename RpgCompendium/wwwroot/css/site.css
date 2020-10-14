@@ -62,6 +62,7 @@ body {
   background-color: rgb(46, 46, 46);
   border: solid rgb(218, 216, 201);
   border-width: 1px;
+  padding: 15px;
 }
 
 .navBar {
@@ -79,10 +80,69 @@ body {
 
 a {
   color:  rgb(218, 216, 201);
+  font-family: MedievalSharp;
+  font-size: 16px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 700; 
+  line-height: 10px;
 }
 
 hr {
   color:  rgb(218, 216, 201);
   border-width: 1px;
   border-color:  rgb(218, 216, 201);
+}
+
+
+h1 { 
+font-family: MedievalSharp;
+font-size: 24px; 
+font-style: normal; 
+font-variant: normal; 
+font-weight: 700; 
+line-height: 21px; 
+} 
+     
+h3 { 
+ font-family: MedievalSharp; 
+ font-size: 22px; 
+ font-style: normal; 
+ font-variant: normal; 
+ font-weight: 700; 
+ line-height: 15.4px; 
+ } 
+      
+ p { 
+  font-family: MedievalSharp; 
+  font-size: 16px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 21px; 
+} 
+
+blockquote { 
+  font-family: MedievalSharp; 
+  font-size: 21px;
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 30px; 
+} 
+pre { 
+  font-family: MedievalSharp;
+  font-size: 13px; 
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 18.5714px;
+}
+input {
+    font-family: MedievalSharp; 
+    font-size: 16px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 400; 
+    line-height: 21px; 
 }
