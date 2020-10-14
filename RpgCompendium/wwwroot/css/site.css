@@ -5,6 +5,7 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  
 }
 
 /* Sticky footer styles
@@ -58,6 +59,27 @@ body {
 }
 
 .mainBox {
-  border: solid black;
+  border: solid white;
   border-width: 1px;
+}
+
+.navBar {
+  background-color: rgba(255, 0, 0, 0.324);
+  color: rgb(255, 255, 255);
+}
+
+.nav-item {
+  color: white;
+}
+
+.nav-item:hover {
+  color: white;
+}
+
+a {
+  color: white;
+}
+
+hr {
+  color: white;
 }

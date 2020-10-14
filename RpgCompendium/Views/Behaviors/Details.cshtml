@@ -4,24 +4,8 @@
 
 @model RpgCompendium.Models.Behavior;
 
-<h2>Behavior Details</h2>
-<hr />
-<h3>Name: @Html.DisplayFor(model => model.BehaviorName)</h3>
-
-@* @* @if(@Model.Behaviors.Count == 0)
-  {
-  <p>This Behavior does not contain any behaviors</p>
-  }
-  else
-  {
-  <h4>Behaviors the monster contains:</h4>
-  <ul>
-  @foreach(var join in Model.MonsterBehaviors)
-  {
-  <li>@join.Behavior.Description</li>
-  }
-  </ul>
-  } *@
+<h3>Behavior Name: @Html.DisplayFor(model => model.BehaviorName) </h3>
+<p>Description: @Html.DisplayFor(model => model.BehaviorDescription)</p>
 
 <p>@Html.ActionLink("Edit this Behavior", "Edit", new { id = Model.BehaviorId }, new {@class="btn btn-success btn-sm"})
 </p>
