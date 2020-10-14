@@ -6,23 +6,23 @@
 
 <h2>Monster Details</h2>
 <hr />
-<h3>Monster name: @Html.DisplayFor(model => model.MonsterName)</h3>
+<h3>Name: @Html.DisplayFor(model => model.MonsterName)</h3>
 
 @* @* @if(@Model.Behaviors.Count == 0)
-{
+  {
   <p>This monster does not contain any behaviors</p>
-}
-else
-{
+  }
+  else
+  {
   <h4>Behaviors the monster contains:</h4>
   <ul>
   @foreach(var join in Model.MonsterBehaviors)
   {
-    <li>@join.Behavior.Description</li>
+  <li>@join.Behavior.Description</li>
   }
   </ul>
-} *@
+  } *@
 
-<p>@Html.ActionLink("Back to monsters", "Index")</p>
-<p>@Html.ActionLink("Edit monster", "Edit", new { id = Model.MonsterId })</p>
-<p>@Html.ActionLink("Delete monster", "Delete", new { id = Model.MonsterId })</p>
+<p>@Html.ActionLink("Edit this monster", "Edit", new { id = Model.MonsterId }, new {@class="btn btn-success btn-sm"})</p>
+<p>@Html.ActionLink("Delete this monster", "Delete", new { id = Model.MonsterId }, new {@class="btn btn-danger btn-sm"})</p>
+<p>@Html.ActionLink("Back to monsters", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>

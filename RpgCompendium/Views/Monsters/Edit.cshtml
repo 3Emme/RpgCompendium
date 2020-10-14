@@ -4,14 +4,16 @@
 @model RpgCompendium.Models.Monster
 
 <h4>Edit Monster @Html.DisplayFor(model => model.MonsterName)</h4>
+<hr />
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.MonsterId)
   @Html.Label("Monster Name")
   @Html.EditorFor(model => model.MonsterName,
 new {@required="required"})
-  
+
   <input type="submit" value="Save Changes" />
 }
 
-<button>@Html.ActionLink("Show all Monsters", "Index")</button>
+
+<p>@Html.ActionLink("Back to monsters", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>

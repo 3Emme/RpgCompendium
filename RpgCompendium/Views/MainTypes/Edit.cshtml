@@ -4,17 +4,18 @@
 @model RpgCompendium.Models.MainType
 
 <h4>Edit Main Type @Html.DisplayFor(model => model.MainTypeName)</h4>
+<hr />
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.MainTypeId)
   @Html.Label("Main Type Name")
   @Html.EditorFor(model => model.MainTypeName,
 new {@required="required"})
-@Html.Label("Main Type Description")
+  @Html.Label("Main Type Description")
   @Html.EditorFor(model => model.MainTypeDescription,
 new {@required="required"})
-  
+
   <input type="submit" value="Save Changes" />
 }
 
-<button>@Html.ActionLink("Show all Main Types", "Index")</button>
+<p>@Html.ActionLink("Back to main type list", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>
