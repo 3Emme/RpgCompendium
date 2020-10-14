@@ -37,7 +37,7 @@ namespace RpgCompendium.Controllers
     public ActionResult Details(int id)
     {
       var thisMonster = _db.Monsters
-          .Include(monster => monster.MonsterBehaviors)
+          // .Include(monster => monster.MonsterBehaviors)
           // .ThenInclude(join => join.MonsterBehaviors)
           .FirstOrDefault(monster => monster.MonsterId == id);
       return View(thisMonster);
