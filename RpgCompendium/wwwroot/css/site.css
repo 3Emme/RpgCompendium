@@ -44,6 +44,7 @@ html {
 
 body {
   /* Margin bottom by footer height */
+  background-im
   margin-bottom: 60px;
   background-color: black;
   color:  rgb(218, 216, 201);
@@ -92,12 +93,18 @@ hr {
   color:  rgb(218, 216, 201);
   border-width: 1px;
   border-color:  rgb(218, 216, 201);
+  font-family: MedievalSharp; 
+  font-size: 16px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 21px; 
 }
 
 
 h1 { 
 font-family: MedievalSharp;
-font-size: 24px; 
+font-size: 32px; 
 font-style: normal; 
 font-variant: normal; 
 font-weight: 700; 
@@ -110,7 +117,7 @@ h3 {
  font-style: normal; 
  font-variant: normal; 
  font-weight: 700; 
- line-height: 15.4px; 
+ line-height: 19.4px; 
  } 
       
  p { 
@@ -145,4 +152,8 @@ input {
     font-variant: normal; 
     font-weight: 400; 
     line-height: 21px; 
+}
+
+.btn {
+  margin: 3px;
 }

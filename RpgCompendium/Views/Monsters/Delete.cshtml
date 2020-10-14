@@ -6,10 +6,12 @@
 <h2>Are you sure you want to delete this?</h2>
 <hr />
 @Html.DisplayNameFor(model => model.MonsterName): @Html.DisplayFor(model => model.MonsterName)
+
+
 @using (Html.BeginForm())
 {
   <br>
   <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
 }
-<br>
-<p>@Html.ActionLink("Cancel", "Details", null, new {id = Model.MonsterId}, new {@class="btn btn-primary btn-sm"})</p>
+<div>@Html.ActionLink("Cancel", "Details", null, new {id = Model.MonsterId}, new {@class="btn btn-primary btn-sm"})
+</div>

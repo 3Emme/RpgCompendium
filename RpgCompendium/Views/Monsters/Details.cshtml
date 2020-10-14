@@ -4,17 +4,17 @@
 
 @model RpgCompendium.Models.Monster;
 
-<h2>Monster Details</h2>
+<h1>Monster Details</h1>
 <hr />
 <h3>Name: @Html.DisplayFor(model => model.MonsterName)</h3>
-
+<hr />
 @if (@Model.MainTypes.Count == 0)
 {
   <p>This monster is not assigned any Main Types</p>
 }
 else
 {
-  <h4>Types the monster contains:</h4>
+  <h3>Types the monster contains:</h3>
   <ul>
     @foreach (var join in Model.MainTypes)
     {
@@ -27,7 +27,7 @@ else
     }
   </ul>
 }
-
+<hr />
 <p>@Html.ActionLink("Edit this monster", "Edit", new { id = Model.MonsterId }, new {@class="btn btn-success btn-sm"})
 </p>
 <p>@Html.ActionLink("Add a Main Type", "AddMainType", "Monsters", new { id = Model.MonsterId } , new {@class="btn btn-success btn-sm"})</p>
