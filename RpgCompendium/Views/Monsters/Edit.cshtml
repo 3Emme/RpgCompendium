@@ -6,8 +6,9 @@
 <h4>Edit Monster @Html.DisplayFor(model => model.MonsterName)</h4>
 @using (Html.BeginForm())
 {
+  @Html.HiddenFor(model => model.MonsterId)
   @Html.Label("Monster Name")
-  @Html.TextBoxFor(model => model.MonsterName,
+  @Html.EditorFor(model => model.MonsterName,
 new {@required="required"})
   
   <input type="submit" value="Save Changes" />
