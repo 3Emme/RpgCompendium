@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RpgCompendium.Models.Monster;
+
+<h2>Monster Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.MonsterName): @Html.DisplayFor(model => model.MonsterId)</h3>
+
+@* @if(@Model.Behaviors.Count == 0)
+{
+  <p>This monster does not contain any behaviors</p>
+}
+else
+{
+  <h4>Behavis the category contains:</h4>
+  <ul>
+  @foreach(var join in Model.Items)
+  {
+    <li>@join.Item.Description</li>
+  }
+  </ul>
+} *@
+
+<p>@Html.ActionLink("Back to monsters", "Index")</p>
+<p>@Html.ActionLink("Edit Monster", "Edit", new { id = Model.MonsterId })</p>
+<p>@Html.ActionLink("Delete Monster", "Delete", new { id = Model.MonsterId })</p>

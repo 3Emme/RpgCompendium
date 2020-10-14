@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+@model RpgCompendium.Models.Monster
+
+<h4>Edit Monster @Html.DisplayFor(model => model.MonsterName)</h4>
+@using (Html.BeginForm())
+{
+  @Html.Label("Monster Name")
+  @Html.TextBoxFor(model => model.MonsterName,
+new {@required="required"})
+  
+  <input type="submit" value="Save Changes" />
+}
+
+<button>@Html.ActionLink("Show all Monsters", "Index")</button>

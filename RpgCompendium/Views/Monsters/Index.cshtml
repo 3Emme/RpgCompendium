@@ -1,0 +1,18 @@
+@using RpgCompendium.Models;
+@{
+  Layout = "_Layout";
+}
+
+<h1>List of Monsters</h1>
+
+<h2>Monsters</h2>
+@if (@Model.Count == 0)
+{
+  <h3>No monsters have been added yet!</h3>
+}
+@foreach (Monster monster in Model)
+{
+  <li>@Html.ActionLink($"{monster.MonsterName}", "Details", new { id = monster.MonsterId}) </li>
+}
+<br>
+<p>@Html.ActionLink("Add New Monster", "Create", null, null, new {@class="btn btn-success btn-sm"})</p>
