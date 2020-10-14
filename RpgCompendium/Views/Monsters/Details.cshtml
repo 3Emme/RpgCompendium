@@ -8,23 +8,32 @@
 <hr />
 <h3>Name: @Html.DisplayFor(model => model.MonsterName)</h3>
 
-@* @* @if(@Model.Behaviors.Count == 0)
-  {
-  <p>This monster does not contain any behaviors</p>
-  }
-  else
-  {
-  <h4>Behaviors the monster contains:</h4>
+@if (@Model.MainTypes.Count == 0)
+{
+  <p>This monster is not assigned any Main Types</p>
+}
+else
+{
+  <h4>Types the monster contains:</h4>
   <ul>
-  @foreach(var join in Model.MonsterBehaviors)
-  {
-  <li>@join.Behavior.Description</li>
-  }
+    @foreach (var join in Model.MainTypes)
+    {
+      @* <li>@join.Maintype.MainTypeName</li> *@
+      <li>@Html.ActionLink($"{join.MainType.MainTypeName}", "Details", "MainTypes", new { id = join.MainType.MainTypeId })</li>
+    @using (Html.BeginForm("DeleteMainType", "Monsters"))
+    {
+      @Html.Hidden("monsterId", @join.MonsterId)
+      @Html.Hidden("joinId", @join.MonsterMainTypeId)
+      <input type="submit" value="Delete" class="btn btn-warning btn-xs" />
+      
+    }
+    }
   </ul>
-  } *@
+}
 
 <p>@Html.ActionLink("Edit this monster", "Edit", new { id = Model.MonsterId }, new {@class="btn btn-success btn-sm"})
 </p>
+<p>@Html.ActionLink("Add a Main Type", "AddMainType", "Monsters", new { id = Model.MonsterId } , new {@class="btn btn-success btn-sm"})</p>
 <p>@Html.ActionLink("Delete this monster", "Delete", new { id = Model.MonsterId }, new {@class="btn btn-danger btn-sm"})
 </p>
 <p>@Html.ActionLink("Back to monsters", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>

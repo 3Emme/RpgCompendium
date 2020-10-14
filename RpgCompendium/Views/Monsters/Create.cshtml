@@ -11,7 +11,10 @@
   @Html.TextBoxFor(model => model.MonsterName,
 new {@required="required"})
 
+  @Html.Label("Select Main-Type")
+  @Html.DropDownList("MainTypeId")
+
   <input type="submit" value="Add new Monster" />
 }
 
-<button>@Html.ActionLink("Show all Monsters", "Index")</button>
+<p>@Html.ActionLink("Show all Monsters", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>
