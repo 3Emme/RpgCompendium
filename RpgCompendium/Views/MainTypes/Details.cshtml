@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+@model RpgCompendium.Models.MainType;
+<h2>Main Type details</h2>
+<hr />
+
+<h3>@Html.DisplayNameFor(model => model.MainTypeId): @Html.DisplayFor(model => model.MainTypeName) @Html.DisplayFor(model => model.MainTypeDescription)</h3>
+
+<br>
+<p>@Html.ActionLink("Edit Main Type", "Edit", null, new { id = Model.MainTypeId } , new {@class="btn btn-success btn-sm"})</p>
+<p>@Html.ActionLink("Delete Main Type", "Delete", new { id = Model.MainTypeId }, new {@class="btn btn-danger btn-sm"})</p>
+<p>@Html.ActionLink("Back to all Main Types", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>

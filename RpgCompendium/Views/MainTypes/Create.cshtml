@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+@model RpgCompendium.Models.MainType
+
+<h4>Add a new Main Type</h4>
+@using (Html.BeginForm())
+{
+  
+  @Html.Label("Main Type Name")
+  @Html.TextBoxFor(model => model.MainTypeName,
+new {@required="required"})
+@Html.Label("Main Type Description")
+  @Html.TextBoxFor(model => model.MainTypeDescription,
+new {@required="required"})
+  
+  <input type="submit" value="Add Main Type" />
+}
+
+<button>@Html.ActionLink("Show all Main Types", "Index")</button>
