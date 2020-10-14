@@ -41,12 +41,16 @@ asp-action="Index">Monsters</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="MainTypes" asp-action="Index">Main
                                 types</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Behaviors"
+asp-action="Index">Behavior</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container mainBox">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
