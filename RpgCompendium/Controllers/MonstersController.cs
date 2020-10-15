@@ -45,6 +45,8 @@ namespace RpgCompendium.Controllers
       var thisMonster = _db.Monsters
           .Include(monster => monster.MainTypes)
           .ThenInclude(join => join.MainType)
+          .Include(monster => monster.Behaviors)
+          .ThenInclude(join => join.Behavior)
           .FirstOrDefault(monster => monster.MonsterId == id);
       return View(thisMonster);
     }
@@ -77,6 +79,7 @@ namespace RpgCompendium.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    // MAIN TYPES
     public ActionResult AddMainType(int id)
     {
       var thisMonster = _db.Monsters.FirstOrDefault(monsters => monsters.MonsterId == id);
@@ -98,6 +101,31 @@ namespace RpgCompendium.Controllers
     {
       var joinEntry = _db.MonsterMainTypes.FirstOrDefault(entry => entry.MonsterMainTypeId == joinId);
       _db.MonsterMainTypes.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = monsterId });
+    }
+    // BEHAVIORS
+    public ActionResult AddBehavior(int id)
+    {
+      var thisMonster = _db.Monsters.FirstOrDefault(monsters => monsters.MonsterId == id);
+      ViewBag.BehaviorId = new SelectList(_db.Behaviors, "BehaviorId", "BehaviorName");
+      return View(thisMonster);
+    }
+    [HttpPost]
+    public ActionResult AddBehavior(Monster monster, int BehaviorId)
+    {
+      if (BehaviorId != 0)
+      {
+        _db.MonsterBehaviors.Add(new MonsterBehavior() { BehaviorId = BehaviorId, MonsterId = monster.MonsterId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = monster.MonsterId });
+    }
+    [HttpPost]
+    public ActionResult DeleteBehavior(int monsterId, int joinId)
+    {
+      var joinEntry = _db.MonsterBehaviors.FirstOrDefault(entry => entry.MonsterBehaviorId == joinId);
+      _db.MonsterBehaviors.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = monsterId });
     }

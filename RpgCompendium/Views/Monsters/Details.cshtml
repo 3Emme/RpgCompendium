@@ -8,6 +8,27 @@
 <hr />
 <h3>Name: @Html.DisplayFor(model => model.MonsterName)</h3>
 <hr />
+
+@if (@Model.Behaviors.Count == 0)
+{
+  <p>This monster is not assigned any Behaviors</p>
+}
+else
+{
+  <h3>Types the monster contains:</h3>
+  <ul>
+    @foreach (var join in Model.Behaviors)
+    {
+      @using (Html.BeginForm("DeleteBehavior", "Monsters"))
+      {
+      <li>@Html.ActionLink($"{join.Behavior.BehaviorName}", "Details", "Behaviors", new { id = join.Behavior.BehaviorId })     <input type="submit" value="Remove" class="btn btn-warning btn-sm" /></li>
+      @Html.Hidden("monsterId", @join.MonsterId)
+      @Html.Hidden("joinId", @join.MonsterBehaviorId)      
+      }
+    }
+  </ul>  
+}
+
 @if (@Model.MainTypes.Count == 0)
 {
   <p>This monster is not assigned any Main Types</p>
@@ -25,12 +46,15 @@ else
       @Html.Hidden("joinId", @join.MonsterMainTypeId)      
       }
     }
-  </ul>
+  </ul>  
 }
+
 <hr />
 <p>@Html.ActionLink("Edit this monster", "Edit", new { id = Model.MonsterId }, new {@class="btn btn-success btn-sm"})
 </p>
 <p>@Html.ActionLink("Add a Main Type", "AddMainType", "Monsters", new { id = Model.MonsterId } , new {@class="btn btn-success btn-sm"})</p>
+<p>@Html.ActionLink("Add a Behavior", "AddBehavior", "Monsters", new { id = Model.MonsterId } , new {@class="btn btn-success btn-sm"})</p>
+
 <p>@Html.ActionLink("Delete this monster", "Delete", new { id = Model.MonsterId }, new {@class="btn btn-danger btn-sm"})
 </p>
 <p>@Html.ActionLink("Back to monsters", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>

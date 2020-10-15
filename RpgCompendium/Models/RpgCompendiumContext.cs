@@ -8,7 +8,7 @@ namespace RpgCompendium.Models
     public virtual DbSet<MainType> MainTypes { get; set; }
     public virtual DbSet<Behavior> Behaviors { get; set; }
     public virtual DbSet<MonsterMainType> MonsterMainTypes { get; set; }
-    public virtual DbSet<MonsterMainType> MonsterBehaviors { get; set; }
+    public virtual DbSet<MonsterBehavior> MonsterBehaviors { get; set; }
 
     public RpgCompendiumContext(DbContextOptions options) : base(options) { }
   }
