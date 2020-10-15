@@ -47,6 +47,8 @@ namespace RpgCompendium.Controllers
           .ThenInclude(join => join.MainType)
           .Include(monster => monster.Behaviors)
           .ThenInclude(join => join.Behavior)
+          .Include(monster => monster.Armors)
+          .ThenInclude(join => join.Armor)
           .FirstOrDefault(monster => monster.MonsterId == id);
       return View(thisMonster);
     }
@@ -126,6 +128,33 @@ namespace RpgCompendium.Controllers
     {
       var joinEntry = _db.MonsterBehaviors.FirstOrDefault(entry => entry.MonsterBehaviorId == joinId);
       _db.MonsterBehaviors.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = monsterId });
+    }
+
+    // ARMOR
+
+    public ActionResult AddArmor(int id)
+    {
+      var thisMonster = _db.Monsters.FirstOrDefault(monsters => monsters.MonsterId == id);
+      ViewBag.ArmorId = new SelectList(_db.Armors, "ArmorId", "ArmorName");
+      return View(thisMonster);
+    }
+    [HttpPost]
+    public ActionResult AddArmor(Monster monster, int ArmorId)
+    {
+      if (ArmorId != 0)
+      {
+        _db.MonsterArmor.Add(new MonsterArmor() { ArmorId = ArmorId, MonsterId = monster.MonsterId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = monster.MonsterId });
+    }
+    [HttpPost]
+    public ActionResult DeleteArmor(int monsterId, int joinId)
+    {
+      var joinEntry = _db.MonsterArmor.FirstOrDefault(entry => entry.MonsterArmorId == joinId);
+      _db.MonsterArmor.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = monsterId });
     }

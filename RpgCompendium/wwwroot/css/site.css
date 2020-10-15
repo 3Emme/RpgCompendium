@@ -48,8 +48,10 @@ body {
   margin-bottom: 60px;
   background-color: black;
   color:  rgb(218, 216, 201);
+  font-family: MedievalSharp;
 }
 .footer {
+  font-family: MedievalSharp;
   position: absolute;
   bottom: 0;
   width: 100%;

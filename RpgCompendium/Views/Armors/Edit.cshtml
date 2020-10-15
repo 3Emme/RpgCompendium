@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+@model RpgCompendium.Models.Armor
+
+<h4>Edit Armor @Html.DisplayFor(model => model.ArmorName)</h4>
+<hr />
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.ArmorId)
+  @Html.Label("Armor Name")
+  @Html.EditorFor(model => model.ArmorName,
+new {@required="required"})
+  @Html.Label("Armor Description")
+  @Html.EditorFor(model => model.ArmorDescription,
+new {@required="required"})
+
+
+  <input type="submit" value="Save Changes" />
+}
+
+
+<p>@Html.ActionLink("Back to Armors", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>
