@@ -136,34 +136,41 @@ namespace RpgCompendium.Controllers
 
     public ActionResult AddArmor(int id)
     {
-      var thisMonster = _db.Monsters.FirstOrDefault(monsters => monsters.MonsterId == id);
+      var thisMonster = _db.Monsters
+      .Include(monster => monster.Armors)
+      .ThenInclude(join => join.Armor)
+      .FirstOrDefault(monsters => monsters.MonsterId == id);
       ViewBag.ArmorId = new SelectList(_db.Armors, "ArmorId", "ArmorName");
+      @System.Console.WriteLine("addarmor1 test count: "+thisMonster.Armors.Count.ToString());
       return View(thisMonster);
     }
     [HttpPost]
     public ActionResult AddArmor(Monster monster, int ArmorId)
     {
+      var thisMonster = _db.Monsters
+      .Include(monsterMonster => monsterMonster.Armors)
+      .ThenInclude(join => join.Armor)
+      .FirstOrDefault(monsters => monsters.MonsterId == monster.MonsterId);
       if (ArmorId != 0)
       {
         bool canEquip = true;
         var thisArmor = _db.Armors.FirstOrDefault(armors => armors.ArmorId == ArmorId);
-        foreach (MonsterArmor monsterArmor in monster.Armors)
+        foreach (MonsterArmor monsterArmor in thisMonster.Armors)
         {
-          System.Console.WriteLine(thisArmor.ArmorSlot, monsterArmor.ArmorSlot);
-          if (thisArmor.ArmorSlot == monsterArmor.ArmorSlot)
+          
+          if (thisArmor.ArmorSlot == monsterArmor.Armor.ArmorSlot)
           {
             System.Console.WriteLine("cant equip!");
             canEquip = false;
           }
         }
         if (canEquip)
-        {
-          // NEED TO SAVE SLOT TO JOIN ENTITY
+        {          
           _db.MonsterArmor.Add(new MonsterArmor() { ArmorId = ArmorId, MonsterId = monster.MonsterId, ArmorSlot = thisArmor.ArmorSlot });
         }
       }
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = monster.MonsterId });
+      return RedirectToAction("Details", new { id = monster.MonsterId});
     }
 
     [HttpPost]
