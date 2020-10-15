@@ -29,9 +29,7 @@ namespace RpgCompendium.Controllers
 
     [HttpPost]
     public ActionResult Create(Armor Armor)
-    {
-      // System.Console.WriteLine(ArmorSlot);
-      // Armor.ArmorSlot = ArmorSlot;
+    {      
       _db.Armors.Add(Armor);
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -82,14 +80,14 @@ namespace RpgCompendium.Controllers
       return View(thisArmor);
     }
     [HttpPost]
-    public ActionResult AddMonster(Armor Armor, int MonsterId)
+    public ActionResult AddMonster(Armor armor, int MonsterId)
     {
       if (MonsterId != 0)
       {
-        _db.MonsterArmor.Add(new MonsterArmor() { MonsterId = MonsterId, ArmorId = Armor.ArmorId });
+        _db.MonsterArmor.Add(new MonsterArmor() { MonsterId = MonsterId, ArmorId = armor.ArmorId });
       }
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = Armor.ArmorId });
+      return RedirectToAction("Details", new { id = armor.ArmorId });
     }
     [HttpPost]
     public ActionResult DeleteMonster(int ArmorId, int joinId)

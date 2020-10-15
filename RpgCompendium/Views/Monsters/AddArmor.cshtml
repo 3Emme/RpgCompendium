@@ -3,21 +3,17 @@
 }
 @model RpgCompendium.Models.Monster
 @* @using System *@
-<h2>Add Armor</h2>
+<h1>Add Armor</h1>
 
-<h4>Add an Armor to this monster: @Html.DisplayFor(model => model.MonsterName)</h4>
+<h3>Add an Armor to this monster: @Html.DisplayFor(model => model.MonsterName)</h3>
 
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.MonsterId)
   @Html.HiddenFor(model => model.Armors)
-  @* @Debug.WriteLine("view test count: "+ model => model.Armors.Count.ToString()) *@
-
   @Html.Label("Select Armor")
   @Html.DropDownList("ArmorId")
-
-  <p>View test: @Model.Armors.Count</p>
-
+  
   <input type="submit" value="Add" class="btn btn-success btn-sm" />
 }
 <br>

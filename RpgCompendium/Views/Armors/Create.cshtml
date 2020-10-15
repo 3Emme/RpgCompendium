@@ -3,7 +3,7 @@
 }
 @model RpgCompendium.Models.Armor
 
-<h4>Add a new Armor</h4>
+<h3>Add a new Armor</h3>
 <hr />
 @using (Html.BeginForm())
 {
@@ -12,20 +12,7 @@
 new {@required="required"})
   @Html.Label("Armor Description")
   @Html.EditorFor(model => model.ArmorDescription,
-new {@required="required"})
-
-  @* <select name="Slot" id="ArmorSlot">
-    <option value="face">Face</option>
-    <option value="torso">Torso</option>
-    <option value="back">back</option>
-    <option value="neck">Neck</option>
-    <option value="arm">Arm</option>
-    <option value="hand">Hand</option>
-    <option value="rings">Rings</option>
-    <option value="body">Body</option>
-    <option value="waist">Waist</option>
-    <option value="legs">Legs</option>
-    </select> *@
+new {@required="required"})  
 
   @Html.DropDownListFor(model => model.ArmorSlot, new List<SelectListItem>
 { new SelectListItem{Text="Head", Value="head"},

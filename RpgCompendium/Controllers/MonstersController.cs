@@ -40,7 +40,7 @@ namespace RpgCompendium.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult Details(int id)
+    public ActionResult Details(int id, string postAlert)
     {
       var thisMonster = _db.Monsters
           .Include(monster => monster.MainTypes)
@@ -50,6 +50,7 @@ namespace RpgCompendium.Controllers
           .Include(monster => monster.Armors)
           .ThenInclude(join => join.Armor)
           .FirstOrDefault(monster => monster.MonsterId == id);
+      ViewBag.postAlert = postAlert;
       return View(thisMonster);
     }
 
@@ -137,8 +138,8 @@ namespace RpgCompendium.Controllers
     public ActionResult AddArmor(int id)
     {
       var thisMonster = _db.Monsters
-      .Include(monster => monster.Armors)
-      .ThenInclude(join => join.Armor)
+      // .Include(monster => monster.Armors)
+      // .ThenInclude(join => join.Armor)
       .FirstOrDefault(monsters => monsters.MonsterId == id);
       ViewBag.ArmorId = new SelectList(_db.Armors, "ArmorId", "ArmorName");
       @System.Console.WriteLine("addarmor1 test count: "+thisMonster.Armors.Count.ToString());
@@ -167,6 +168,13 @@ namespace RpgCompendium.Controllers
         if (canEquip)
         {          
           _db.MonsterArmor.Add(new MonsterArmor() { ArmorId = ArmorId, MonsterId = monster.MonsterId, ArmorSlot = thisArmor.ArmorSlot });
+          _db.SaveChanges();
+          return RedirectToAction("Details", new { id = monster.MonsterId, postAlert = "Alert: You successfully equipped something!"});
+        }
+        else
+        {
+          _db.SaveChanges();
+          return RedirectToAction("Details", new { id = monster.MonsterId, postAlert = "Alert: There is already something equipped there!"});
         }
       }
       _db.SaveChanges();

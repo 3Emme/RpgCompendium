@@ -121,6 +121,15 @@ h3 {
  font-weight: 700; 
  line-height: 19.4px; 
  } 
+ h4 {
+  font-family: MedievalSharp;
+  font-size: 32px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 700; 
+  line-height: 21px; 
+  color: red;
+ }
       
  p { 
   font-family: MedievalSharp; 
