@@ -145,11 +145,27 @@ namespace RpgCompendium.Controllers
     {
       if (ArmorId != 0)
       {
-        _db.MonsterArmor.Add(new MonsterArmor() { ArmorId = ArmorId, MonsterId = monster.MonsterId });
+        bool canEquip = true;
+        var thisArmor = _db.Armors.FirstOrDefault(armors => armors.ArmorId == ArmorId);
+        foreach (MonsterArmor monsterArmor in monster.Armors)
+        {
+          System.Console.WriteLine(thisArmor.ArmorSlot, monsterArmor.ArmorSlot);
+          if (thisArmor.ArmorSlot == monsterArmor.ArmorSlot)
+          {
+            System.Console.WriteLine("cant equip!");
+            canEquip = false;
+          }
+        }
+        if (canEquip)
+        {
+          // NEED TO SAVE SLOT TO JOIN ENTITY
+          _db.MonsterArmor.Add(new MonsterArmor() { ArmorId = ArmorId, MonsterId = monster.MonsterId, ArmorSlot = thisArmor.ArmorSlot });
+        }
       }
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = monster.MonsterId });
     }
+
     [HttpPost]
     public ActionResult DeleteArmor(int monsterId, int joinId)
     {

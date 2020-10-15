@@ -6,11 +6,12 @@
 
 <h3>Armor Name: @Html.DisplayFor(model => model.ArmorName) </h3>
 <p>Description: @Html.DisplayFor(model => model.ArmorDescription)</p>
+<p>Slot: @Html.DisplayFor(model => model.ArmorSlot)</p>
 
 
 @if (@Model.Monsters.Count == 0)
 {
-  <p>This Main Type is not assigned any Monsters</p>
+  <p>This Armor is not assigned any Monsters</p>
 }
 else
 {
@@ -31,8 +32,8 @@ else
 <p>@Html.ActionLink("Edit this Armor", "Edit", new { id = Model.ArmorId }, new {@class="btn btn-success btn-sm"})
 </p>
 
-<p>@Html.ActionLink("Add a Monster", "AddMonster", "Armors", new { id = Model.ArmorId } , new {@class="btn btn-success btn-sm"})</p>
+<p>@Html.ActionLink("Add to a Monster", "AddMonster", "Armors", new { id = Model.ArmorId } , new {@class="btn btn-success btn-sm"})</p>
 
 <p>@Html.ActionLink("Delete this Armor", "Delete", new { id = Model.ArmorId }, new {@class="btn btn-danger btn-sm"})
 </p>
-<p>@Html.ActionLink("Back to Armors", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>
+<p>@Html.ActionLink("Back to all Armor", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p> 

@@ -14,6 +14,33 @@ new {@required="required"})
   @Html.EditorFor(model => model.ArmorDescription,
 new {@required="required"})
 
+  @* <select name="Slot" id="ArmorSlot">
+    <option value="face">Face</option>
+    <option value="torso">Torso</option>
+    <option value="back">back</option>
+    <option value="neck">Neck</option>
+    <option value="arm">Arm</option>
+    <option value="hand">Hand</option>
+    <option value="rings">Rings</option>
+    <option value="body">Body</option>
+    <option value="waist">Waist</option>
+    <option value="legs">Legs</option>
+    </select> *@
+
+  @Html.DropDownListFor(model => model.ArmorSlot, new List<SelectListItem>
+{ new SelectListItem{Text="Head", Value="head"},
+new SelectListItem{Text="Face", Value="face"},
+new SelectListItem{Text="Torso", Value="torso"},
+new SelectListItem{Text="Back", Value="back"},
+new SelectListItem{Text="Neck", Value="neck"},
+new SelectListItem{Text="Arm", Value="arm"},
+new SelectListItem{Text="Hand", Value="hand"},
+new SelectListItem{Text="Rings", Value="rings"},
+new SelectListItem{Text="Body", Value="body"},
+new SelectListItem{Text="Waist", Value="waist"},
+new SelectListItem{Text="Legs", Value="legs"}
+},"Please select")
+
   <input type="submit" value="Add new Armor" />
 }
 

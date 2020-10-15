@@ -30,6 +30,8 @@ namespace RpgCompendium.Controllers
     [HttpPost]
     public ActionResult Create(Armor Armor)
     {
+      // System.Console.WriteLine(ArmorSlot);
+      // Armor.ArmorSlot = ArmorSlot;
       _db.Armors.Add(Armor);
       _db.SaveChanges();
       return RedirectToAction("Index");
