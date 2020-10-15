@@ -38,8 +38,8 @@ namespace RpgCompendium.Controllers
     public ActionResult Details(int id)
     {
       var thisMainType = _db.MainTypes
-          .Include(mainType => mainType.Monsters)
-          .ThenInclude(join => join.Monster)
+          // .Include(mainType => mainType.Monsters)
+          // .ThenInclude(join => join.Monster)
           .FirstOrDefault(mainType => mainType.MainTypeId == id);
       return View(thisMainType);
     }

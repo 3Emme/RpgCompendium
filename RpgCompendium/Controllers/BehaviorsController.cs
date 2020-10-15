@@ -38,8 +38,8 @@ namespace RpgCompendium.Controllers
     public ActionResult Details(int id)
     {
       var thisBehavior = _db.Behaviors
-          .Include(monster => monster.Monsters)
-          .ThenInclude(join => join.Monster)
+          // .Include(monster => monster.Monsters)
+          // .ThenInclude(join => join.Monster)
           .FirstOrDefault(behavior => behavior.BehaviorId == id);
       return View(thisBehavior);
     }

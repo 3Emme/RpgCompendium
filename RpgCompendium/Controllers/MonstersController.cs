@@ -43,12 +43,12 @@ namespace RpgCompendium.Controllers
     public ActionResult Details(int id, string postAlert)
     {
       var thisMonster = _db.Monsters
-          .Include(monster => monster.MainTypes)
-          .ThenInclude(join => join.MainType)
-          .Include(monster => monster.Behaviors)
-          .ThenInclude(join => join.Behavior)
-          .Include(monster => monster.Armors)
-          .ThenInclude(join => join.Armor)
+          // .Include(monster => monster.MainTypes)
+          // .ThenInclude(join => join.MainType)
+          // .Include(monster => monster.Behaviors)
+          // .ThenInclude(join => join.Behavior)
+          // .Include(monster => monster.Armors)
+          // .ThenInclude(join => join.Armor)
           .FirstOrDefault(monster => monster.MonsterId == id);
       ViewBag.postAlert = postAlert;
       return View(thisMonster);
@@ -149,16 +149,15 @@ namespace RpgCompendium.Controllers
     public ActionResult AddArmor(Monster monster, int ArmorId)
     {
       var thisMonster = _db.Monsters
-      .Include(monsterMonster => monsterMonster.Armors)
-      .ThenInclude(join => join.Armor)
+      // .Include(monsterMonster => monsterMonster.Armors)
+      // .ThenInclude(join => join.Armor)
       .FirstOrDefault(monsters => monsters.MonsterId == monster.MonsterId);
       if (ArmorId != 0)
       {
         bool canEquip = true;
         var thisArmor = _db.Armors.FirstOrDefault(armors => armors.ArmorId == ArmorId);
         foreach (MonsterArmor monsterArmor in thisMonster.Armors)
-        {
-          
+        {          
           if (thisArmor.ArmorSlot == monsterArmor.Armor.ArmorSlot)
           {
             System.Console.WriteLine("cant equip!");

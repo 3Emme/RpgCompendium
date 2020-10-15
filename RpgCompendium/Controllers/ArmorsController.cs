@@ -38,8 +38,8 @@ namespace RpgCompendium.Controllers
     public ActionResult Details(int id)
     {
       var thisArmor = _db.Armors
-          .Include(monster => monster.Monsters)
-          .ThenInclude(join => join.Monster)
+          // .Include(monster => monster.Monsters)
+          // .ThenInclude(join => join.Monster)
           .FirstOrDefault(Armor => Armor.ArmorId == id);
       return View(thisArmor);
     }
