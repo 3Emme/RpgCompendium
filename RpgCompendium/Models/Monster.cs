@@ -11,7 +11,8 @@ namespace RpgCompendium.Models
       this.Armors = new HashSet<MonsterArmor>();      
     }
     public int MonsterId { get; set; }
-    public string MonsterName { get; set; }    
+    public string MonsterName { get; set; }
+    public virtual ApplicationUser User { get; set; }
     public virtual ICollection<MonsterMainType> MainTypes { get; set; }
     public virtual ICollection<MonsterBehavior> Behaviors { get; set; }
     public virtual ICollection<MonsterArmor> Armors { get; set; }

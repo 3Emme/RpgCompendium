@@ -4,22 +4,33 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace RpgCompendium.Controllers
 {
+  [Authorize]
   public class MonstersController : Controller
   {
     private readonly RpgCompendiumContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public MonstersController(RpgCompendiumContext db)
+    public MonstersController(UserManager<ApplicationUser> userManager, RpgCompendiumContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-      List<Monster> model = _db.Monsters.ToList();
-      return View(model);
+      // List<Monster> model = _db.Monsters.ToList();
+      // return View(model);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var userMonsters = _db.Monsters.Where(entry => entry.User.Id == currentUser.Id).ToList();
+      return View(userMonsters);
     }
 
     public ActionResult Create()
@@ -29,8 +40,18 @@ namespace RpgCompendium.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Monster monster, int MainTypeId)
+    public async Task<ActionResult> Create(Monster monster, int MainTypeId)
     {
+      // _db.Monsters.Add(monster);
+      // if (MainTypeId != 0)
+      // {
+      //   _db.MonsterMainTypes.Add(new MonsterMainType() { MainTypeId = MainTypeId, MonsterId = monster.MonsterId });
+      // }
+      // _db.SaveChanges();
+      // return RedirectToAction("Index");
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      monster.User = currentUser;
       _db.Monsters.Add(monster);
       if (MainTypeId != 0)
       {

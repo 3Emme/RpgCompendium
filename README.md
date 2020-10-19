@@ -10,7 +10,14 @@ A website to create and origanize all your assests for your RPG!
 
 ##User Stories:
 
-Monsters:
+As Admin:
+* Full CRUD on all monster, armor, type, and behaviors
+
+As User:
+* Read all monsters, types, armor, and behavior
+* Full CRUD on monster objects owned by user
+
+Creating Monsters:
 
 * I would like to create a new monster, and remove/edit it.
 * I would like to create a new monster "Main Type", and remove/edit it.
