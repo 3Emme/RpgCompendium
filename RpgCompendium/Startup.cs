@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using RpgCompendium.Models;
+//new code
+using Microsoft.AspNetCore.Identity;
 
 namespace RpgCompendium
 {
@@ -23,15 +25,25 @@ namespace RpgCompendium
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddMvc();
+
       services.AddEntityFrameworkMySql()
         .AddDbContext<RpgCompendiumContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
+
+
+      services.AddIdentity<ApplicationUser, IdentityRole>()
+      .AddEntityFrameworkStores<RpgCompendiumContext>()
+      .AddDefaultTokenProviders();
     }
 
     public void Configure(IApplicationBuilder app)
     {
-      app.UseDeveloperExceptionPage();
       app.UseStaticFiles();
+
+      app.UseDeveloperExceptionPage();
+
+
+      app.UseAuthentication();
 
       app.UseMvc(routes =>
       {
@@ -44,7 +56,6 @@ namespace RpgCompendium
       {
         await context.Response.WriteAsync("Something went wrong!");
       });
-
     }
   }
 }

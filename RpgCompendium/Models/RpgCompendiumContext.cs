@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace RpgCompendium.Models
 {
-  public class RpgCompendiumContext : DbContext
+  public class RpgCompendiumContext : IdentityDbContext<ApplicationUser>
   {
     public DbSet<Monster> Monsters { get; set; }
     public DbSet<MainType> MainTypes { get; set; }
