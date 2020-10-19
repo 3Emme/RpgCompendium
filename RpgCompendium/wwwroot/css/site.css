@@ -81,6 +81,10 @@ body {
   color:  rgb(218, 216, 201);
 }
 
+.navR {
+  float: right;
+}
+
 a {
   color:  rgb(218, 216, 201);
   font-family: MedievalSharp;
