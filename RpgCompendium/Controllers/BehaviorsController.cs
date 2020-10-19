@@ -4,9 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace RpgCompendium.Controllers
 {
+  [Authorize(Roles = "Administrator")]
   public class BehaviorsController : Controller
   {
     private readonly RpgCompendiumContext _db;
@@ -16,6 +21,7 @@ namespace RpgCompendium.Controllers
       _db = db;
     }
 
+  [AllowAnonymous]
     public ActionResult Index()
     {
       List<Behavior> model = _db.Behaviors.ToList();
@@ -35,6 +41,7 @@ namespace RpgCompendium.Controllers
       return RedirectToAction("Index");
     }
 
+  [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisBehavior = _db.Behaviors

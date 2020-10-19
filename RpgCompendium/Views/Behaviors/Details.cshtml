@@ -29,9 +29,12 @@ else
   </ul>
 }
 
+@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+{
 <p>@Html.ActionLink("Edit this Behavior", "Edit", new { id = Model.BehaviorId }, new {@class="btn btn-success btn-sm"})
 </p>
 <p>@Html.ActionLink("Add a Monster", "AddMonster", "Behaviors", new { id = Model.BehaviorId } , new {@class="btn btn-success btn-sm"})</p>
 <p>@Html.ActionLink("Delete this Behavior", "Delete", new { id = Model.BehaviorId }, new {@class="btn btn-danger btn-sm"})
 </p>
+}
 <p>@Html.ActionLink("Back to Behaviors", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>

@@ -16,4 +16,10 @@
   <li>@Html.ActionLink($"{behavior.BehaviorName}", "Details", new { id = behavior.BehaviorId}) </li>
 }
 <br>
-<p>@Html.ActionLink("Add New Behavior", "Create", null, null, new {@class="btn btn-success btn-sm"})</p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+{
+  <p>@Html.ActionLink("Add New Behavior", "Create", null, null, new {@class="btn btn-success btn-sm"})</p>
+}
+
+
+  @* if (User.Identity.IsAuthenticated && User.IsInRole("Administrator")) *@

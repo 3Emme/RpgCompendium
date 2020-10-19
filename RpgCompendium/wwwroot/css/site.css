@@ -172,3 +172,7 @@ input {
 .btn {
   margin: 3px;
 }
+
+td {
+  color:  rgb(218, 216, 201);
+}
