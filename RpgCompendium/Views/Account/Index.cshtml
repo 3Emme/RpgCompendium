@@ -27,7 +27,7 @@
   <h3>No monsters have been added yet</h3>
   }
   <hr />
-  <div>@Html.ActionLink("Add New Monster", "Create", null, null, new {@class="btn btn-success btn-sm"})</div>
+  <div>@Html.ActionLink("Add New Monster", "Create", "Monsters", null, new {@class="btn btn-success btn-sm"})</div>
   @using (Html.BeginForm("LogOff", "Account"))
   {
     <input type="submit" value="Log out" class="btn btn-danger btn-sm" />

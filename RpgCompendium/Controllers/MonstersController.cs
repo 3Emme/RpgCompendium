@@ -23,7 +23,7 @@ namespace RpgCompendium.Controllers
       _db = db;
     }
 
-    public async Task<ActionResult> Index()
+    public ActionResult Index()
     {
       List<Monster> model = _db.Monsters.ToList();
       return View(model);
@@ -61,7 +61,7 @@ namespace RpgCompendium.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult Details(int id, string postAlert)
+    public async Task<ActionResult> Details(int id, string postAlert)
     {
       var thisMonster = _db.Monsters
           // .Include(monster => monster.MainTypes)
@@ -71,7 +71,13 @@ namespace RpgCompendium.Controllers
           // .Include(monster => monster.Armors)
           // .ThenInclude(join => join.Armor)
           .FirstOrDefault(monster => monster.MonsterId == id);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      // var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+      ViewBag.User = currentUser;     
+
       ViewBag.postAlert = postAlert;
+      
       return View(thisMonster);
     }
 

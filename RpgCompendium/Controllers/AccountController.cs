@@ -31,11 +31,17 @@ namespace RpgCompendium.Controllers
 
     public async Task<ActionResult> Index()
     {
-      // return View();
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      if(User.Identity.IsAuthenticated)
+      {
       var currentUser = await _userManager.FindByIdAsync(userId);
       var userMonsters = _db.Monsters.Where(entry => entry.User.Id == currentUser.Id).ToList();
       return View(userMonsters);
+      }
+      else
+      {
+        return View();
+      }
     }
 
     public IActionResult Register()
