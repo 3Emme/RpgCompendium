@@ -7,7 +7,7 @@ namespace RpgCompendium.Models
     public Armor()
     {
       this.Monsters = new HashSet<MonsterArmor>();
-      this.Properties = new HashSet<ItemPropertyJoin>();
+      this.ItemProperties = new HashSet<ItemPropertyJoin>();
     }
 
 
@@ -24,7 +24,7 @@ namespace RpgCompendium.Models
     // public string ArmorFlags { get; set; }
     // public string ArmorRarity { get; set; }
     public virtual ICollection<MonsterArmor> Monsters { get; set; }
-    public virtual ICollection<ItemPropertyJoin> Properties { get; set; }
+    public virtual ICollection<ItemPropertyJoin> ItemProperties { get; set; }
   }
 }
 //slot,acBonus,type,name,Id,worth,Hp,level,status,flags,rarityA

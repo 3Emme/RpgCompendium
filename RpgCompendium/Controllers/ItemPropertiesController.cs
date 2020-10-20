@@ -75,5 +75,29 @@ namespace RpgCompendium.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    
+    public ActionResult AddItem(int id)
+    {
+      var thisProperty = _db.ItemProperties.FirstOrDefault(property => property.ItemPropertyId == id);
+      ViewBag.ArmorId = new SelectList(_db.Armors, "ArmorId", "ArmorName");
+      ViewBag.WeaponId = new SelectList(_db.Weapons, "WeaponId", "WeaponName");
+      return View(thisProperty);
+    }
+
+    [HttpPost]
+    public ActionResult AddItem(ItemProperty itemProperty, int ArmorId, int WeaponId)
+    {
+      if (ArmorId != 0)
+      {
+        _db.ItemPropertyJoins.Add(new ItemPropertyJoin() { ArmorId = ArmorId, ItemPropertyId = itemProperty.ItemPropertyId });
+      }
+
+      if (WeaponId != 0)
+      {
+        _db.ItemPropertyJoins.Add(new ItemPropertyJoin() { WeaponId = WeaponId, ItemPropertyId = itemProperty.ItemPropertyId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = itemProperty.ItemPropertyId });
+    }
   }
 }

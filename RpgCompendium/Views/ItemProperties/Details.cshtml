@@ -19,16 +19,19 @@ else
   <ul>
     @foreach (var join in Model.ItemPropertyJoins)
     {
-      @using (Html.BeginForm("DeleteMonster", "Behaviors"))
+      if(join.Armor != null)
       {
-      <li>@Html.ActionLink($"{join.Armor.ArmorName}", "Details", "Armors", new { id = join.Armor.ArmorId })     
-      @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
-      {
-      <input type="submit" value="Remove" class="btn btn-warning btn-sm" />
-      }
-      </li>
-      @Html.Hidden("itemPropertyId", @join.ItemPropertyId)
-      @Html.Hidden("joinId", @join.ItemPropertyJoinId)      
+        @using (Html.BeginForm("DeleteMonster", "Behaviors"))
+        {
+        <li>@Html.ActionLink($"{join.Armor.ArmorName}", "Details", "Armors", new { id = join.Armor.ArmorId })     
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+        {
+        <input type="submit" value="Remove" class="btn btn-warning btn-sm" />
+        }
+        </li>
+        @Html.Hidden("itemPropertyId", @join.ItemPropertyId)
+        @Html.Hidden("joinId", @join.ItemPropertyJoinId)      
+        }
       }
     }
   </ul>
@@ -37,16 +40,19 @@ else
   <ul>
     @foreach (var join in Model.ItemPropertyJoins)
     {
-      @using (Html.BeginForm("DeleteMonster", "Behaviors"))
+      if(join.Weapon != null)
       {
-      <li>@Html.ActionLink($"{join.Weapon.WeaponName}", "Details", "Weapons", new { id = join.Weapon.WeaponId })     
-      @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
-      {
-      <input type="submit" value="Remove" class="btn btn-warning btn-sm" />
-      }
-      </li>
-      @Html.Hidden("itemPropertyId", @join.ItemPropertyId)
-      @Html.Hidden("joinId", @join.ItemPropertyJoinId)      
+        @using (Html.BeginForm("DeleteMonster", "Behaviors"))
+        {
+        <li>@Html.ActionLink($"{join.Weapon.WeaponName}", "Details", "Weapons", new { id = join.Weapon.WeaponId })     
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+        {
+        <input type="submit" value="Remove" class="btn btn-warning btn-sm" />
+        }
+        </li>
+        @Html.Hidden("itemPropertyId", @join.ItemPropertyId)
+        @Html.Hidden("joinId", @join.ItemPropertyJoinId)      
+        }
       }
     }
   </ul>
@@ -61,7 +67,9 @@ else
 {
 <p>@Html.ActionLink("Edit this Item Property", "Edit", new { id = Model.ItemPropertyId }, new {@class="btn btn-success btn-sm"})
 </p>
-<p>@Html.ActionLink("Add a Monster", "AddMonster", "ItemProperties", new { id = Model.ItemPropertyId } , new {@class="btn btn-success btn-sm"})</p>
+
+<p>@Html.ActionLink("Add a Item", "AddItem", "ItemProperties", new { id = Model.ItemPropertyId } , new {@class="btn btn-success btn-sm"})</p>
+
 <p>@Html.ActionLink("Delete this Item Property", "Delete", new { id = Model.ItemPropertyId }, new {@class="btn btn-danger btn-sm"})
 </p>
 }

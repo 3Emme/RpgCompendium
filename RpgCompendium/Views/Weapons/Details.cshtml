@@ -7,8 +7,33 @@
 <h3>Weapon Name: @Html.DisplayFor(model => model.WeaponName) </h3>
 <p>Description: @Html.DisplayFor(model => model.WeaponDescription)</p>
 @* <p>Slot: @Html.DisplayFor(model => model.WeaponProperties)</p> *@
-
-
+@* ItemProperties assigned *@
+@if (@Model.ItemProperties.Count == 0)
+{
+  <p>This Weapon is not assigned any Item Properties</p>
+}
+else
+{
+  <h3>Item Properties for this Weapon:</h3>
+  <ul>
+    @foreach (var join in Model.ItemProperties)
+    {
+      
+      @using (Html.BeginForm("DeleteItemProperty", "Weapons"))
+      {
+      <li>@Html.ActionLink($"{join.ItemProperty.ItemPropertyName}", "Details", "ItemProperties", new { id = join.ItemProperty.ItemPropertyId })     
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+      {      
+      <input type="submit" value="Remove" class="btn btn-warning btn-sm" />
+      }      
+      </li>
+      @Html.Hidden("WeaponId", @join.WeaponId)
+      @Html.Hidden("joinId", @join.ItemPropertyJoinId)      
+      }
+    }
+  </ul>
+}
+@* Monsters Assigned *@
 @if (@Model.Monsters.Count == 0)
 {
   <p>This Weapon is not assigned any Monsters</p>
@@ -41,6 +66,7 @@ else
 </p>
 
 <p>@Html.ActionLink("Add to a Monster", "AddMonster", "Weapons", new { id = Model.WeaponId } , new {@class="btn btn-success btn-sm"})</p>
+<p>@Html.ActionLink("Add a Property to this Item", "AddItem", "Weapons", new { id = Model.WeaponId } , new {@class="btn btn-success btn-sm"})</p>
 
 <p>@Html.ActionLink("Delete this Weapon", "Delete", new { id = Model.WeaponId }, new {@class="btn btn-danger btn-sm"})
 </p>
