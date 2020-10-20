@@ -86,7 +86,7 @@ else
 }
 
 
-@* @if (@Model.Weapons.Count == 0)
+@if (@Model.Weapons.Count == 0)
 {
   <p>This monster is not equipped with any Weapon</p>
 }
@@ -109,7 +109,7 @@ else
       }
     }
   </ul>  
-} *@
+}
 
 <hr />
 @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator") ||User.Identity.IsAuthenticated && @ViewBag.User.Id == Model.User.Id)
