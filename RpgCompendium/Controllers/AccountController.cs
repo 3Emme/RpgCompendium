@@ -87,16 +87,17 @@ namespace RpgCompendium.Controllers
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index");
     }
-    // public async Task<ActionResult> Edit(int id)
-    // {
-    //   var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    //   if(User.Identity.IsAuthenticated)
-    //   {
-    //   var currentUser = await _userManager.FindByIdAsync(userId);
-    //   }
-    //   return View(currentUser);
-    // }
-
+    public async Task<ActionResult> Edit(int id)
+    {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      if(User.Identity.IsAuthenticated)
+      {
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      return View(currentUser);
+      }
+      return View();
+    }
+    
     // [HttpPost]
     // public async Task<ActionResult> Edit(Monster monster)
     // {

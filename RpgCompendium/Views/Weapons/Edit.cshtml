@@ -14,11 +14,11 @@ new {@required="required"})
   @Html.Label("Weapon Description")
   @Html.EditorFor(model => model.WeaponDescription,
 new {@required="required"})
-  @Html.DropDownListFor(model => model.WeaponSlot, new List<SelectListItem>
+  @* @Html.DropDownListFor(model => model.WeaponSlot, new List<SelectListItem>
   { 
   new SelectListItem{Text="One Handed", Value="oneHanded"},
   new SelectListItem{Text="Two Handed", Value="twoHanded"}
-  },"Please select")
+  },"Please select") *@
 
 
   <input type="submit" value="Save Changes" />

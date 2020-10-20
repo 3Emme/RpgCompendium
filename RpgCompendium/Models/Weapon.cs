@@ -12,7 +12,7 @@ namespace RpgCompendium.Models
     public int WeaponId { get; set; }
     public string WeaponName { get; set; }
     public string WeaponDescription { get; set; }
-    public string WeaponSlot { set; get; }
+    public string WeaponProperties { set; get; }
     // public int WeaponClass { get; set; }
     // public string WeaponType { get; set; }
     // public string WeaponWorth { get; set; }
@@ -22,6 +22,7 @@ namespace RpgCompendium.Models
     // public string WeaponFlags { get; set; }
     // public string WeaponRarity { get; set; }
     public virtual ICollection<MonsterWeapon> Monsters { get; set; }
+    public virtual ICollection<ItemPropertyJoin> Properties { get; set; }
   }
 }
 //slot,acBonus,type,name,Id,worth,Hp,level,status,flags,rarityA

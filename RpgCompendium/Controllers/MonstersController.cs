@@ -215,5 +215,60 @@ namespace RpgCompendium.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = monsterId });
     }
+
+    // WEAPON
+    public ActionResult AddWeapon(int id)
+    {
+      var thisMonster = _db.Monsters
+      // .Include(monster => monster.Armors)
+      // .ThenInclude(join => join.Armor)
+      .FirstOrDefault(monsters => monsters.MonsterId == id);
+      ViewBag.WeaponId = new SelectList(_db.Weapons, "WeaponId", "WeaponName");
+      @System.Console.WriteLine("addWeapon1 test count: "+thisMonster.Weapons.Count.ToString());
+      return View(thisMonster);
+    }
+    // [HttpPost]
+    // public ActionResult AddWeapon(Monster monster, int WeaponId)
+    // {
+    //   var thisMonster = _db.Monsters
+    //   // .Include(monsterMonster => monsterMonster.Armors)
+    //   // .ThenInclude(join => join.Armor)
+    //   .FirstOrDefault(monsters => monsters.MonsterId == monster.MonsterId);
+    //   if (WeaponId != 0)
+    //   {
+    //     bool canEquip = true;
+    //     var thisWeapon = _db.Weapons.FirstOrDefault(Weapons => Weapons.WeaponId == WeaponId);
+    //     foreach (MonsterWeapon monsterWeapon in thisMonster.Weapons)
+    //     {          
+    //       if (thisWeapon.WeaponSlot == monsterWeapon.Weapon.WeaponSlot) // if (thisWeapon.WeaponSlot == "OneHanded" && (thisMonster.Weapons != "TwoHanded" || thisMonster.Weapons.Length <2)
+    //       {
+    //         System.Console.WriteLine("cant equip!");
+    //         canEquip = false;
+    //       }
+    //     }
+    //     if (canEquip)
+    //     {          
+    //       _db.MonsterWeapons.Add(new MonsterWeapon() { WeaponId = WeaponId, MonsterId = monster.MonsterId});
+    //       _db.SaveChanges();
+    //       return RedirectToAction("Details", new { id = monster.MonsterId, postAlert = "Alert: You successfully equipped something!"});
+    //     }
+    //     else
+    //     {
+    //       _db.SaveChanges();
+    //       return RedirectToAction("Details", new { id = monster.MonsterId, postAlert = "Alert: There is already something equipped there!"});
+    //     }
+    //   }
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Details", new { id = monster.MonsterId});
+    // }
+
+    [HttpPost]
+    public ActionResult DeleteWeapon(int monsterId, int joinId)
+    {
+      var joinEntry = _db.MonsterWeapons.FirstOrDefault(entry => entry.MonsterWeaponId == joinId);
+      _db.MonsterWeapons.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = monsterId });
+    }
   }
 }

@@ -85,6 +85,32 @@ else
   </ul>  
 }
 
+
+@* @if (@Model.Weapons.Count == 0)
+{
+  <p>This monster is not equipped with any Weapon</p>
+}
+else
+{
+  <h3>Weapons the monster has equipped:</h3>
+  <ul>
+    @foreach (var join in Model.Weapons)
+    {
+      @using (Html.BeginForm("DeleteWeapon", "Monsters"))
+      {
+      <li>@Html.ActionLink($"{join.Weapon.WeaponName}", "Details", "Weapons", new { id = join.Weapon.WeaponId })     
+      @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator") ||User.Identity.IsAuthenticated && @ViewBag.User.Id == Model.User.Id)
+      {
+      <input type="submit" value="Remove" class="btn btn-warning btn-sm" />
+      }
+      </li>
+      @Html.Hidden("monsterId", @join.MonsterId)
+      @Html.Hidden("joinId", @join.MonsterWeaponId)      
+      }
+    }
+  </ul>  
+} *@
+
 <hr />
 @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator") ||User.Identity.IsAuthenticated && @ViewBag.User.Id == Model.User.Id)
 {
@@ -95,6 +121,7 @@ else
   <p>@Html.ActionLink("Add a Main Type", "AddMainType", "Monsters", new { id = Model.MonsterId } , new {@class="btn btn-success btn-sm"})</p>
   <p>@Html.ActionLink("Add a Behavior", "AddBehavior", "Monsters", new { id = Model.MonsterId } , new {@class="btn btn-success btn-sm"})</p>
   <p>@Html.ActionLink("Add Armor", "AddArmor", "Monsters", new { id = Model.MonsterId } , new {@class="btn btn-success btn-sm"})</p>
+  <p>@Html.ActionLink("Add Weapon", "AddWeapon", "Monsters", new { id = Model.MonsterId } , new {@class="btn btn-success btn-sm"})</p>
 </div>
 <p>@Html.ActionLink("Delete this monster", "Delete", new { id = Model.MonsterId }, new {@class="btn btn-danger btn-sm"})
 </p>

@@ -22,6 +22,7 @@ namespace RpgCompendium.Models
     // public string ArmorFlags { get; set; }
     // public string ArmorRarity { get; set; }
     public virtual ICollection<MonsterArmor> Monsters { get; set; }
+    public virtual ICollection<ItemPropertyJoin> Properties { get; set; }
   }
 }
 //slot,acBonus,type,name,Id,worth,Hp,level,status,flags,rarityA
