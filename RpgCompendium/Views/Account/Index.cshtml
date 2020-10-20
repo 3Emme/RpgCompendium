@@ -5,15 +5,15 @@
 @model IEnumerable<RpgCompendium.Models.Monster>
 @using System.Security.Claims
 
-<h2>My Account</h2>
+<h1>User Account</h1>
 <hr />
 @if (User.Identity.IsAuthenticated)
 {
-  <p>Hello @User.Identity.Name!</p>
-  <h1>Monsters for @User.Identity.Name</h1>
-  <h1>List of Monsters</h1>
+  <h1>Hello @User.Identity.Name</h1>
+  @* <h1>Monsters for @User.Identity.Name</h1>
+  <h1>List of Monsters</h1> *@
   <hr />
-
+  <p>@Html.ActionLink("Edit Details", "Edit")</p>
   <h3>Your Monsters:</h3>
   @if (@Model.Any())
   {

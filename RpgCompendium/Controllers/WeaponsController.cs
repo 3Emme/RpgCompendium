@@ -12,18 +12,18 @@ using System.Security.Claims;
 namespace RpgCompendium.Controllers
 {
   [Authorize(Roles = "Administrator")]
-  public class ArmorsController : Controller
+  public class WeaponsController : Controller
   {
     private readonly RpgCompendiumContext _db;
 
-    public ArmorsController(RpgCompendiumContext db)
+    public WeaponsController(RpgCompendiumContext db)
     {
       _db = db;
     }
-[AllowAnonymous]
+    [AllowAnonymous]
     public ActionResult Index()
     {
-      List<Armor> model = _db.Armors.ToList();
+      List<Weapon> model = _db.Weapons.ToList();
       return View(model);
     }
 
@@ -33,74 +33,74 @@ namespace RpgCompendium.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Armor Armor)
+    public ActionResult Create(Weapon Weapon)
     {      
-      _db.Armors.Add(Armor);
+      _db.Weapons.Add(Weapon);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-[AllowAnonymous]
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
-      var thisArmor = _db.Armors
+      var thisWeapon = _db.Weapons
           // .Include(monster => monster.Monsters)
           // .ThenInclude(join => join.Monster)
-          .FirstOrDefault(Armor => Armor.ArmorId == id);
-      return View(thisArmor);
+          .FirstOrDefault(Weapon => Weapon.WeaponId == id);
+      return View(thisWeapon);
     }
 
     public ActionResult Edit(int id)
     {
-      var thisArmor = _db.Armors.FirstOrDefault(Armor => Armor.ArmorId == id);
-      return View(thisArmor);
+      var thisWeapon = _db.Weapons.FirstOrDefault(Weapon => Weapon.WeaponId == id);
+      return View(thisWeapon);
     }
 
     [HttpPost]
-    public ActionResult Edit(Armor Armor)
+    public ActionResult Edit(Weapon Weapon)
     {
-      _db.Entry(Armor).State = EntityState.Modified;
+      _db.Entry(Weapon).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Delete(int id)
     {
-      var thisArmor = _db.Armors.FirstOrDefault(Armor => Armor.ArmorId == id);
-      return View(thisArmor);
+      var thisWeapon = _db.Weapons.FirstOrDefault(Weapon => Weapon.WeaponId == id);
+      return View(thisWeapon);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      var thisArmor = _db.Armors.FirstOrDefault(Armor => Armor.ArmorId == id);
-      _db.Armors.Remove(thisArmor);
+      var thisWeapon = _db.Weapons.FirstOrDefault(Weapon => Weapon.WeaponId == id);
+      _db.Weapons.Remove(thisWeapon);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
     // MONSTERS
     public ActionResult AddMonster(int id)
     {
-      var thisArmor = _db.Armors.FirstOrDefault(Armors => Armors.ArmorId == id);
+      var thisWeapon = _db.Weapons.FirstOrDefault(AWeapons => AWeapons.WeaponId == id);
       ViewBag.MonsterId = new SelectList(_db.Monsters, "MonsterId", "MonsterName");
-      return View(thisArmor);
+      return View(thisWeapon);
     }
     [HttpPost]
-    public ActionResult AddMonster(Armor armor, int MonsterId)
+    public ActionResult AddMonster(Weapon weapon, int MonsterId)
     {
       if (MonsterId != 0)
       {
-        _db.MonsterArmors.Add(new MonsterArmor() { MonsterId = MonsterId, ArmorId = armor.ArmorId });
+        _db.MonsterWeapons.Add(new MonsterWeapon() { MonsterId = MonsterId, WeaponId = weapon.WeaponId });
       }
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = armor.ArmorId });
+      return RedirectToAction("Details", new { id = weapon.WeaponId });
     }
     [HttpPost]
-    public ActionResult DeleteMonster(int ArmorId, int joinId)
+    public ActionResult DeleteMonster(int WeaponId, int joinId)
     {
-      var joinEntry = _db.MonsterArmors.FirstOrDefault(entry => entry.MonsterArmorId == joinId);
-      _db.MonsterArmors.Remove(joinEntry);
+      var joinEntry = _db.MonsterWeapons.FirstOrDefault(entry => entry.MonsterWeaponId == joinId);
+      _db.MonsterWeapons.Remove(joinEntry);
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = ArmorId });
+      return RedirectToAction("Details", new { id = WeaponId });
     }
   }
 }

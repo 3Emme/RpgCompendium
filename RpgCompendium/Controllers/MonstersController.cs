@@ -193,7 +193,7 @@ namespace RpgCompendium.Controllers
         }
         if (canEquip)
         {          
-          _db.MonsterArmor.Add(new MonsterArmor() { ArmorId = ArmorId, MonsterId = monster.MonsterId, ArmorSlot = thisArmor.ArmorSlot });
+          _db.MonsterArmors.Add(new MonsterArmor() { ArmorId = ArmorId, MonsterId = monster.MonsterId});
           _db.SaveChanges();
           return RedirectToAction("Details", new { id = monster.MonsterId, postAlert = "Alert: You successfully equipped something!"});
         }
@@ -210,8 +210,8 @@ namespace RpgCompendium.Controllers
     [HttpPost]
     public ActionResult DeleteArmor(int monsterId, int joinId)
     {
-      var joinEntry = _db.MonsterArmor.FirstOrDefault(entry => entry.MonsterArmorId == joinId);
-      _db.MonsterArmor.Remove(joinEntry);
+      var joinEntry = _db.MonsterArmors.FirstOrDefault(entry => entry.MonsterArmorId == joinId);
+      _db.MonsterArmors.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = monsterId });
     }

@@ -52,7 +52,7 @@ namespace RpgCompendium.Controllers
     [HttpPost]
     public async Task<ActionResult> Register (RegisterViewModel model)
     {
-      var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+      var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
       IdentityResult result = await _userManager.CreateAsync(user, model.Password);
       if (result.Succeeded)
       {
@@ -87,5 +87,34 @@ namespace RpgCompendium.Controllers
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index");
     }
+    // public async Task<ActionResult> Edit(int id)
+    // {
+    //   var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    //   if(User.Identity.IsAuthenticated)
+    //   {
+    //   var currentUser = await _userManager.FindByIdAsync(userId);
+    //   }
+    //   return View(currentUser);
+    // }
+
+    // [HttpPost]
+    // public async Task<ActionResult> Edit(Monster monster)
+    // {
+    //   _db.Entry(monster).State = EntityState.Modified;
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Details", new { id = monster.MonsterId });
+
+    //   // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    //   // if(User.Identity.IsAuthenticated)
+    //   // {
+    //   // var currentUser = await _userManager.FindByIdAsync(userId);
+    //   // var userMonsters = _db.Monsters.Where(entry => entry.User.Id == currentUser.Id).ToList();
+    //   // return View(userMonsters);
+    //   // }
+    //   // else
+    //   // {
+    //   //   return View();
+    //   // }
+    // }
   }
 }

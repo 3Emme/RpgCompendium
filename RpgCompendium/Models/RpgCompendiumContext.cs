@@ -9,9 +9,11 @@ namespace RpgCompendium.Models
     public DbSet<MainType> MainTypes { get; set; }
     public DbSet<Behavior> Behaviors { get; set; }
     public DbSet<Armor> Armors { get; set; }
+    public DbSet<Weapon> Weapons { get; set; }
     public DbSet<MonsterMainType> MonsterMainTypes { get; set; }
     public DbSet<MonsterBehavior> MonsterBehaviors { get; set; }
-    public DbSet<MonsterArmor> MonsterArmor { get; set; }
+    public DbSet<MonsterArmor> MonsterArmors { get; set; }
+    public DbSet<MonsterWeapon> MonsterWeapons { get; set; }
 
     public RpgCompendiumContext(DbContextOptions options) : base(options) { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
