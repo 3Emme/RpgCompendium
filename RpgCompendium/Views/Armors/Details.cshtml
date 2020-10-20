@@ -19,16 +19,24 @@ else
   <ul>
     @foreach (var join in Model.Monsters)
     {
+      
       @using (Html.BeginForm("DeleteMonster", "Armors"))
       {
-      <li>@Html.ActionLink($"{join.Monster.MonsterName}", "Details", "Monsters", new { id = join.Monster.MonsterId })     <input type="submit" value="Remove" class="btn btn-warning btn-sm" /></li>
+      <li>@Html.ActionLink($"{join.Monster.MonsterName}", "Details", "Monsters", new { id = join.Monster.MonsterId })     
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+      {      
+      <input type="submit" value="Remove" class="btn btn-warning btn-sm" />
+      }      
+      </li>
       @Html.Hidden("ArmorId", @join.ArmorId)
       @Html.Hidden("joinId", @join.MonsterArmorId)      
       }
     }
   </ul>
 }
-
+<hr />
+@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+      {
 <p>@Html.ActionLink("Edit this Armor", "Edit", new { id = Model.ArmorId }, new {@class="btn btn-success btn-sm"})
 </p>
 
@@ -36,4 +44,5 @@ else
 
 <p>@Html.ActionLink("Delete this Armor", "Delete", new { id = Model.ArmorId }, new {@class="btn btn-danger btn-sm"})
 </p>
+      }
 <p>@Html.ActionLink("Back to all Armor", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p> 

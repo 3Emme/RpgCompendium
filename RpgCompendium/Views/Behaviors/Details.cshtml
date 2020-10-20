@@ -21,14 +21,19 @@ else
     {
       @using (Html.BeginForm("DeleteMonster", "Behaviors"))
       {
-      <li>@Html.ActionLink($"{join.Monster.MonsterName}", "Details", "Monsters", new { id = join.Monster.MonsterId })     <input type="submit" value="Remove" class="btn btn-warning btn-sm" /></li>
+      <li>@Html.ActionLink($"{join.Monster.MonsterName}", "Details", "Monsters", new { id = join.Monster.MonsterId })     
+      @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+      {
+      <input type="submit" value="Remove" class="btn btn-warning btn-sm" />
+      }
+      </li>
       @Html.Hidden("behaviorId", @join.BehaviorId)
       @Html.Hidden("joinId", @join.MonsterBehaviorId)      
       }
     }
   </ul>
 }
-
+<hr />
 @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
 {
 <p>@Html.ActionLink("Edit this Behavior", "Edit", new { id = Model.BehaviorId }, new {@class="btn btn-success btn-sm"})

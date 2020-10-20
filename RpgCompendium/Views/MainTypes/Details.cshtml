@@ -20,7 +20,12 @@ else
     {
       @using (Html.BeginForm("DeleteMonster", "MainTypes"))
       {
-      <li>@Html.ActionLink($"{join.Monster.MonsterName}", "Details", "Monsters", new { id = join.Monster.MonsterId })     <input type="submit" value="Remove" class="btn btn-warning btn-sm" /></li>
+      <li>@Html.ActionLink($"{join.Monster.MonsterName}", "Details", "Monsters", new { id = join.Monster.MonsterId })     
+      @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+      {
+      <input type="submit" value="Remove" class="btn btn-warning btn-sm" />
+      }
+      </li>
       @Html.Hidden("mainTypeId", @join.MainTypeId)
       @Html.Hidden("joinId", @join.MonsterMainTypeId)      
       }
@@ -28,8 +33,11 @@ else
   </ul>
 }
 
-<br>
+<hr />
+@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+{
 <p>@Html.ActionLink("Edit Main Type", "Edit", null, new { id = Model.MainTypeId } , new {@class="btn btn-success btn-sm"})</p>
 <p>@Html.ActionLink("Add a Monster", "AddMonster", "MainTypes", new { id = Model.MainTypeId } , new {@class="btn btn-success btn-sm"})</p>
 <p>@Html.ActionLink("Delete this Main Type", "Delete", new { id = Model.MainTypeId }, new {@class="btn btn-danger btn-sm"})</p>
+}
 <p>@Html.ActionLink("Back to all Main Types", "Index", null, null, new {@class="btn btn-primary btn-sm"})</p>

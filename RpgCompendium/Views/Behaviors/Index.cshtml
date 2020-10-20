@@ -3,7 +3,7 @@
   Layout = "_Layout";
 }
 
-<h1>List of Behaviors</h1>
+<h1>List of Monster Behaviors</h1>
 <hr />
 
 <h3>Behaviors:</h3>
@@ -15,7 +15,7 @@
 {
   <li>@Html.ActionLink($"{behavior.BehaviorName}", "Details", new { id = behavior.BehaviorId}) </li>
 }
-<br>
+<hr />
 @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
 {
   <p>@Html.ActionLink("Add New Behavior", "Create", null, null, new {@class="btn btn-success btn-sm"})</p>

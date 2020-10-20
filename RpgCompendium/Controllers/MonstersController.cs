@@ -25,12 +25,12 @@ namespace RpgCompendium.Controllers
 
     public async Task<ActionResult> Index()
     {
-      // List<Monster> model = _db.Monsters.ToList();
-      // return View(model);
-      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      var currentUser = await _userManager.FindByIdAsync(userId);
-      var userMonsters = _db.Monsters.Where(entry => entry.User.Id == currentUser.Id).ToList();
-      return View(userMonsters);
+      List<Monster> model = _db.Monsters.ToList();
+      return View(model);
+      // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      // var currentUser = await _userManager.FindByIdAsync(userId);
+      // var userMonsters = _db.Monsters.Where(entry => entry.User.Id == currentUser.Id).ToList();
+      // return View(userMonsters);
     }
 
     public ActionResult Create()

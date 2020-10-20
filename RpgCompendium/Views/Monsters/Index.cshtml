@@ -3,7 +3,7 @@
 @{
   Layout = "_Layout";
 }
-<h1>Monsters for @User.Identity.Name</h1>
+@* <h1>All Monsters</h1> *@
 <h1>List of Monsters</h1>
 <hr />
 
@@ -12,7 +12,7 @@
 {
   @foreach (Monster monster in Model)
   {
-    <li>@Html.ActionLink($"{monster.MonsterName}", "Details", new { id = monster.MonsterId}) </li>
+    <li>@Html.ActionLink($"{monster.MonsterName}", "Details", "Monsters", new { id = monster.MonsterId}) </li>
   }
 }
 else

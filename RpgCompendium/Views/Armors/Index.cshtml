@@ -3,7 +3,7 @@
   Layout = "_Layout";
 }
 
-<h1>List of Armor</h1>
+<h1>List of Monster Armor</h1>
 <hr />
 
 <h3>Armor:</h3>
@@ -15,5 +15,8 @@
 {
   <li>@Html.ActionLink($"{armor.ArmorName}", "Details", new { id = armor.ArmorId}) </li>
 }
-<br>
-<p>@Html.ActionLink("Add New Armor", "Create", null, null, new {@class="btn btn-success btn-sm"})</p>
+<hr />
+@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+    {
+    <p>@Html.ActionLink("Add New Armor", "Create", null, null, new {@class="btn btn-success btn-sm"})</p>
+    }
