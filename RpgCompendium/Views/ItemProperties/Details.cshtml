@@ -21,7 +21,7 @@ else
     {
       if(join.Armor != null)
       {
-        @using (Html.BeginForm("DeleteMonster", "Behaviors"))
+        @using (Html.BeginForm("DeleteItem", "ItemProperties"))
         {
         <li>@Html.ActionLink($"{join.Armor.ArmorName}", "Details", "Armors", new { id = join.Armor.ArmorId })     
         @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
@@ -42,7 +42,7 @@ else
     {
       if(join.Weapon != null)
       {
-        @using (Html.BeginForm("DeleteMonster", "Behaviors"))
+        @using (Html.BeginForm("DeleteItem", "ItemProperties"))
         {
         <li>@Html.ActionLink($"{join.Weapon.WeaponName}", "Details", "Weapons", new { id = join.Weapon.WeaponId })     
         @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))

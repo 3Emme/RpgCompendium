@@ -8,7 +8,33 @@
 <p>Description: @Html.DisplayFor(model => model.ArmorDescription)</p>
 <p>Slot: @Html.DisplayFor(model => model.ArmorSlot)</p>
 
-
+@* ItemProperties assigned *@
+@if (@Model.ItemProperties.Count == 0)
+{
+  <p>This Armor is not assigned any Item Properties</p>
+}
+else
+{
+  <h3>Item Properties for this Armor:</h3>
+  <ul>
+    @foreach (var join in Model.ItemProperties)
+    {
+      
+      @using (Html.BeginForm("DeleteItemProperty", "Armors"))
+      {
+      <li>@Html.ActionLink($"{join.ItemProperty.ItemPropertyName}", "Details", "ItemProperties", new { id = join.ItemProperty.ItemPropertyId })     
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+      {      
+      <input type="submit" value="Remove" class="btn btn-warning btn-sm" />
+      }      
+      </li>
+      @Html.Hidden("ArmorId", @join.ArmorId)
+      @Html.Hidden("joinId", @join.ItemPropertyJoinId)      
+      }
+    }
+  </ul>
+}
+@* Monsters Assigned *@
 @if (@Model.Monsters.Count == 0)
 {
   <p>This Armor is not assigned any Monsters</p>
@@ -41,6 +67,8 @@ else
 </p>
 
 <p>@Html.ActionLink("Add to a Monster", "AddMonster", "Armors", new { id = Model.ArmorId } , new {@class="btn btn-success btn-sm"})</p>
+
+<p>@Html.ActionLink("Add a Property to this Item", "AddItemProperty", "Armors", new { id = Model.ArmorId } , new {@class="btn btn-success btn-sm"})</p>
 
 <p>@Html.ActionLink("Delete this Armor", "Delete", new { id = Model.ArmorId }, new {@class="btn btn-danger btn-sm"})
 </p>

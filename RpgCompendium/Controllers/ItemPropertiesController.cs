@@ -99,5 +99,14 @@ namespace RpgCompendium.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = itemProperty.ItemPropertyId });
     }
+
+    [HttpPost]
+    public ActionResult DeleteItem(int ItemPropertyId, int joinId)
+    {
+      var joinEntry = _db.ItemPropertyJoins.FirstOrDefault(entry => entry.ItemPropertyJoinId == joinId);
+      _db.ItemPropertyJoins.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = ItemPropertyId });
+    }
   }
 }

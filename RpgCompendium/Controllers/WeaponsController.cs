@@ -102,5 +102,32 @@ namespace RpgCompendium.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = WeaponId });
     }
+
+    // PROPERTIES
+
+    public ActionResult AddItemProperty(int id)
+    {
+      var thisWeapon = _db.Weapons.FirstOrDefault(AWeapons => AWeapons.WeaponId == id);
+      ViewBag.ItemPropertyId = new SelectList(_db.ItemProperties, "ItemPropertyId", "ItemPropertyName");
+      return View(thisWeapon);
+    }
+    [HttpPost]
+    public ActionResult AddItemProperty(Weapon weapon, int ItemPropertyId)
+    {
+      if (ItemPropertyId != 0)
+      {
+        _db.ItemPropertyJoins.Add(new ItemPropertyJoin() { ItemPropertyId = ItemPropertyId, WeaponId = weapon.WeaponId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = weapon.WeaponId });
+    }
+    [HttpPost]
+    public ActionResult DeleteItemProperty(int WeaponId, int joinId)
+    {
+      var joinEntry = _db.ItemPropertyJoins.FirstOrDefault(entry => entry.ItemPropertyJoinId == joinId);
+      _db.ItemPropertyJoins.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = WeaponId });
+    }
   }
 }
