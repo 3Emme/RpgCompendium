@@ -6,17 +6,17 @@ namespace RpgCompendium.Models
   {
     public ItemProperty()
     {
-      this.Armor = new HashSet<ItemPropertyJoin>();
-      this.Weapon = new HashSet<ItemPropertyJoin>();
+      // this.Armors = new HashSet<ItemPropertyJoin>();
+      // this.Weapons = new HashSet<ItemPropertyJoin>();
+      this.ItemPropertyJoins = new HashSet<ItemPropertyJoin>();
     }
 
     public int ItemPropertyId { get; set; }
     public string ItemPropertyName { get; set; }
     public string ItemPropertyDescription { get; set; }
     public string ItemPropertyFlags { set; get; }
-    
-    public virtual ICollection<ItemPropertyJoin> Armor { get; set; }
-    public virtual ICollection<ItemPropertyJoin> Weapon { get; set; }
+    public virtual ICollection<ItemPropertyJoin> ItemPropertyJoins { get; set; }
+    // public virtual ICollection<ItemPropertyJoin> Weapons { get; set; }
     
   }
 }

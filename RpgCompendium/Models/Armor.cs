@@ -7,7 +7,9 @@ namespace RpgCompendium.Models
     public Armor()
     {
       this.Monsters = new HashSet<MonsterArmor>();
+      this.Properties = new HashSet<ItemPropertyJoin>();
     }
+
 
     public int ArmorId { get; set; }
     public string ArmorName { get; set; }

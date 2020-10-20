@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RpgCompendium.Models;
 
 namespace RpgCompendium.Migrations
 {
     [DbContext(typeof(RpgCompendiumContext))]
-    partial class RpgCompendiumContextModelSnapshot : ModelSnapshot
+    [Migration("20201020213700_WeaponAndItemPropertyAndItemPropertyJoin")]
+    partial class WeaponAndItemPropertyAndItemPropertyJoin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,7 +229,9 @@ namespace RpgCompendium.Migrations
 
                     b.Property<int?>("ArmorId");
 
-                    b.Property<int>("ItemPropertyId");
+                    b.Property<int?>("ItemPropertyId");
+
+                    b.Property<int?>("ItemPropertyId1");
 
                     b.Property<int?>("WeaponId");
 
@@ -236,6 +240,8 @@ namespace RpgCompendium.Migrations
                     b.HasIndex("ArmorId");
 
                     b.HasIndex("ItemPropertyId");
+
+                    b.HasIndex("ItemPropertyId1");
 
                     b.HasIndex("WeaponId");
 
@@ -413,10 +419,13 @@ namespace RpgCompendium.Migrations
                         .WithMany("Properties")
                         .HasForeignKey("ArmorId");
 
-                    b.HasOne("RpgCompendium.Models.ItemProperty", "ItemProperty")
-                        .WithMany("ItemPropertyJoins")
-                        .HasForeignKey("ItemPropertyId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("RpgCompendium.Models.ItemProperty")
+                        .WithMany("Armor")
+                        .HasForeignKey("ItemPropertyId");
+
+                    b.HasOne("RpgCompendium.Models.ItemProperty")
+                        .WithMany("Weapon")
+                        .HasForeignKey("ItemPropertyId1");
 
                     b.HasOne("RpgCompendium.Models.Weapon", "Weapon")
                         .WithMany("Properties")
