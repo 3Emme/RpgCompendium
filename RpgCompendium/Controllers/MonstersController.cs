@@ -230,6 +230,7 @@ namespace RpgCompendium.Controllers
     [HttpPost]
     public ActionResult AddWeapon(Monster monster, int WeaponId, string WeaponSlot)
     {
+      string failAlert = "Alert: You can't equip that.";
       var thisMonster = _db.Monsters
       // .Include(monsterMonster => monsterMonster.Armors)
       // .ThenInclude(join => join.Armor)
@@ -238,24 +239,58 @@ namespace RpgCompendium.Controllers
       {
         bool canEquip = true;
         var thisWeapon = _db.Weapons.FirstOrDefault(Weapons => Weapons.WeaponId == WeaponId);
+        bool twoHanded = false;
+        
+        foreach (ItemPropertyJoin itemPropertyJoin in thisWeapon.ItemProperties)
+        {
+          if (itemPropertyJoin.ItemProperty.ItemPropertyName == "Two-Handed")
+          {
+            twoHanded = true;
+            if (thisMonster.Weapons.Count > 0)
+            {
+              canEquip = false;
+              failAlert = "Alert: You can't equip that; Both hands need to be free to equip Two-Handed weapons.";
+            }
+          }
+        }
+        
+        if (twoHanded)
+        {
+          if (WeaponSlot != "bothHands")
+          {
+            canEquip = false;
+            failAlert = "Alert: You can't equip that; Two-Handed weapons must be equipped with both hands.";
+          }
+        }
+
+        if (!twoHanded)
+        {
+          if (WeaponSlot == "bothHands")
+          {
+            canEquip = false;
+            failAlert = "Alert: You can't equip that; To equip a weapon in both hands, the weapon must have the property Two-Handed.";
+          }
+        }
+        
         foreach (MonsterWeapon monsterWeapon in thisMonster.Weapons)
         {          
-          if (WeaponSlot == monsterWeapon.WeaponSlot) // if (thisWeapon.WeaponSlot == "OneHanded" && (thisMonster.Weapons != "TwoHanded" || thisMonster.Weapons.Length <2)
+          if (WeaponSlot == monsterWeapon.WeaponSlot || monsterWeapon.WeaponSlot == "bothHands") 
           {
             System.Console.WriteLine("cant equip!");
             canEquip = false;
+            failAlert = "Alert: You already have something equipped there.";
           }
         }
         if (canEquip)
         {          
           _db.MonsterWeapons.Add(new MonsterWeapon() { WeaponId = WeaponId, MonsterId = monster.MonsterId, WeaponSlot = WeaponSlot});
           _db.SaveChanges();
-          return RedirectToAction("Details", new { id = monster.MonsterId, postAlert = "Alert: You successfully equipped something!"});
+          return RedirectToAction("Details", new { id = monster.MonsterId, postAlert = $"You successfully equipped {thisWeapon.WeaponName}!"});
         }
         else
         {
           _db.SaveChanges();
-          return RedirectToAction("Details", new { id = monster.MonsterId, postAlert = "Alert: There is already something equipped there!"});
+          return RedirectToAction("Details", new { id = monster.MonsterId, postAlert = failAlert});
         }
       }
       _db.SaveChanges();

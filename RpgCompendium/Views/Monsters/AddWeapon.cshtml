@@ -13,10 +13,13 @@
   @Html.HiddenFor(model => model.Weapons)
   @Html.Label("Select Weapon")
   @Html.DropDownList("WeaponId")
+
+  @Html.Label("Select Hand")
   @Html.DropDownList("WeaponSlot", new List<SelectListItem>
   { 
     new SelectListItem{Text="Main Hand", Value="mainHand"},
-    new SelectListItem{Text="Off Hand", Value="offHand"}
+    new SelectListItem{Text="Off Hand", Value="offHand"},
+    new SelectListItem{Text="Both Hands", Value="bothHands"}
   },"Please select")
   
   <input type="submit" value="Add" class="btn btn-success btn-sm" />
